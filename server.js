@@ -38,10 +38,12 @@ function requireLogin(req, res, next) {
 }
 
 function requireAdmin(req, res, next) {
-  const groups = req.session.user?.groups || [];
-  if (!groups.includes('Admin')) {
+  const roles = req.session.user?.roles || [];
+
+  if (!roles.includes('Admin')) {
     return res.status(403).render('forbidden', { user: req.session.user });
   }
+
   next();
 }
 
@@ -90,10 +92,20 @@ app.get('/authorization-code/callback', async (req, res, next) => {
     );
 
     const claims = tokenSet.claims();
+
+    const rolesClaim = 'https://okta-local-lab.example.com/roles';
+
+    const roles =
+      claims[rolesClaim] ||
+      claims.roles ||
+      claims.groups ||
+      [];
+
     req.session.user = {
       sub: claims.sub,
       name: claims.name,
       email: claims.email,
+      roles,
       groups: claims.groups || [],
       idTokenClaims: claims,
       accessToken: tokenSet.access_token

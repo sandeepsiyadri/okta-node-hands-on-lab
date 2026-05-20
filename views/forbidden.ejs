@@ -1,10 +1,15 @@
-<!doctype html>
-<html>
-<head><title>Forbidden</title></head>
-<body>
-  <h1>403 - Access Denied</h1>
-  <p>You are logged in, but you are not in the <strong>Admin</strong> group.</p>
-  <p>Your groups: <%= user.groups.length ? user.groups.join(', ') : 'No groups claim received' %></p>
-  <p><a href="/profile">Back to Profile</a></p>
-</body>
-</html>
+<h1>403 - Access Denied</h1>
+
+<p>You are logged in, but you do not have the Admin role.</p>
+
+<p>
+  <strong>Your roles:</strong>
+  <%= user.roles && user.roles.length ? user.roles.join(', ') : 'No roles claim received' %>
+</p>
+
+<p>
+  <strong>Your groups:</strong>
+  <%= user.groups && user.groups.length ? user.groups.join(', ') : 'No groups claim received' %>
+</p>
+
+<p><a href="/profile">Back to Profile</a></p>
