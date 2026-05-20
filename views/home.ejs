@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head><title>Okta Node Lab</title></head>
+<body>
+  <h1>Okta Node.js Hands-on Lab</h1>
+  <% if (user) { %>
+    <p>Logged in as <strong><%= user.email %></strong></p>
+    <p><a href="/profile">Profile</a> | <a href="/admin">Admin Page</a></p>
+    <form method="post" action="/logout"><button>Logout</button></form>
+  <% } else { %>
+    <p>This app uses Okta OIDC Authorization Code + PKCE login.</p>
+    <a href="/login">Login with Okta</a>
+  <% } %>
+</body>
+</html>

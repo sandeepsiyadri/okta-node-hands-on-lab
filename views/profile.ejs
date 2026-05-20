@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head><title>Profile</title></head>
+<body>
+  <h1>User Profile</h1>
+  <p><strong>Name:</strong> <%= user.name || 'N/A' %></p>
+  <p><strong>Email:</strong> <%= user.email || 'N/A' %></p>
+  <p><strong>Groups:</strong> <%= user.groups.length ? user.groups.join(', ') : 'No groups claim received' %></p>
+
+  <h2>ID Token Claims</h2>
+  <pre><%= JSON.stringify(user.idTokenClaims, null, 2) %></pre>
+
+  <p><a href="/">Home</a> | <a href="/admin">Admin Page</a></p>
+</body>
+</html>
